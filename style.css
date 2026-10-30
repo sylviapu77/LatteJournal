@@ -73,16 +73,23 @@ h1, h2, h3, p { margin-top: 0; }
 .section-heading h2 { margin: 13px 0 0; font-size: 28px; }
 .section-heading > p { margin: 0 0 6px; color: var(--muted); font-size: 11px; line-height: 1.9; }
 .pattern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.pattern-image { position: relative; display: block; height: 260px; overflow: hidden; background-position: center; background-size: cover; }
-.pattern-image::after { position: absolute; inset: 0; background: rgba(32, 24, 18, .05); content: ""; transition: background .3s; }
-.pattern-image:hover::after { background: rgba(32, 24, 18, .22); }
-.heart-image { background-image: url("https://images.unsplash.com/photo-1517256673644-36ad11246d21?auto=format&fit=crop&w=750&q=80"); }
-.tulip-image { background-image: url("https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=750&q=80"); }
-.rosetta-image { background-image: url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=750&q=80"); }
-.pattern-number, .pattern-arrow { position: absolute; z-index: 1; color: white; }
-.pattern-number { top: 16px; left: 17px; font-size: 10px; letter-spacing: 1px; }
-.pattern-arrow { right: 16px; bottom: 14px; font-size: 19px; transition: transform .2s; }
-.pattern-image:hover .pattern-arrow { transform: translate(3px, -3px); }
+.pattern-image { position: relative; display: block; height: 260px; perspective: 1000px; }
+.pattern-flipper { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .65s cubic-bezier(.2,.7,.25,1); }
+.pattern-image:hover .pattern-flipper, .pattern-image:focus-visible .pattern-flipper { transform: rotateY(180deg); }
+.pattern-image:focus-visible { outline: 2px solid var(--coffee); outline-offset: 4px; }
+.pattern-face { position: absolute; inset: 0; display: flex; overflow: hidden; backface-visibility: hidden; }
+.pattern-front { align-items: flex-start; justify-content: space-between; padding: 16px 17px; background-position: center; background-size: cover; }
+.pattern-front::after { position: absolute; inset: 0; z-index: 0; background: linear-gradient(180deg, rgba(32,24,18,.2), transparent 35%, rgba(32,24,18,.38)); content: ""; }
+.heart-image .pattern-front { background-image: url("https://images.unsplash.com/photo-1517256673644-36ad11246d21?auto=format&fit=crop&w=750&q=80"); }
+.tulip-image .pattern-front { background-image: url("https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=750&q=80"); }
+.rosetta-image .pattern-front { background-image: url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=750&q=80"); }
+.pattern-number, .pattern-arrow { position: relative; z-index: 1; color: white; }
+.pattern-number { font-size: 10px; letter-spacing: 1px; }
+.pattern-arrow { align-self: flex-end; font-size: 10px; letter-spacing: .5px; }
+.pattern-back { align-items: center; justify-content: center; flex-direction: column; padding: 25px; transform: rotateY(180deg); background: #d7c8b7; color: var(--ink); text-align: center; }
+.pattern-back-title { margin-bottom: 12px; font: 500 16px var(--serif); }
+.pattern-back > span:nth-child(2) { max-width: 260px; color: #5e554b; font-size: 11px; line-height: 1.9; }
+.pattern-back-hint { margin-top: 21px; color: var(--coffee); font-size: 9px; letter-spacing: .5px; }
 .pattern-info { display: flex; align-items: center; justify-content: space-between; padding-top: 15px; }
 .pattern-info h3 { margin: 0; font: 500 16px var(--serif); }
 .pattern-info p { margin: 4px 0 0; color: var(--muted); font-size: 8px; letter-spacing: 1.3px; }
