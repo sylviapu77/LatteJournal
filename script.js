@@ -39,23 +39,27 @@ const practiceGuides = {
   ]
 };
 
-document.querySelectorAll(".practice-option").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll(".practice-option").forEach((option) => {
-      const selected = option === button;
-      option.classList.toggle("is-selected", selected);
-      option.setAttribute("aria-pressed", String(selected));
-    });
-    const practice = button.dataset.practice;
-    practiceEyebrow.textContent = "跟著步驟慢慢來";
-    practiceHeading.textContent = `${practice}｜簡單步驟`;
-    practiceDescription.hidden = true;
-    practiceSteps.replaceChildren(...practiceGuides[practice].map((step) => {
-      const item = document.createElement("li");
-      item.textContent = step;
-      return item;
-    }));
-    practiceSteps.hidden = false;
-    practiceMessage.textContent = practice;
+function selectPractice(practice) {
+  document.querySelectorAll(".practice-option").forEach((option) => {
+    const selected = option.dataset.practice === practice;
+    option.classList.toggle("is-selected", selected);
+    option.setAttribute("aria-pressed", String(selected));
+  });
+
+  practiceEyebrow.textContent = "跟著步驟慢慢來";
+  practiceHeading.textContent = `${practice}｜簡單步驟`;
+  practiceDescription.hidden = true;
+  practiceSteps.replaceChildren(...practiceGuides[practice].map((step) => {
+    const item = document.createElement("li");
+    item.textContent = step;
+    return item;
+  }));
+  practiceSteps.hidden = false;
+  practiceMessage.textContent = practice;
+}
+
+document.querySelectorAll(".practice-option, .pattern-image").forEach((trigger) => {
+  trigger.addEventListener("click", () => {
+    selectPractice(trigger.dataset.practice);
   });
 });
