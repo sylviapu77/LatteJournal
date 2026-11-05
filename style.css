@@ -110,9 +110,14 @@ h1, h2, h3, p { margin-top: 0; }
 .shop-price { color: var(--coffee); font-size: 11px; white-space: nowrap; }
 .add-to-cart { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 12px 13px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font-size: 10px; transition: background .2s, color .2s, border-color .2s; }
 .add-to-cart:hover { border-color: var(--ink); background: var(--ink); color: white; }
-.cart-dialog { width: min(440px, calc(100% - 32px)); max-width: none; max-height: min(80vh, 700px); margin: 0 0 0 auto; padding: 30px; border: 0; background: var(--paper); color: var(--ink); box-shadow: -15px 0 50px rgba(41, 37, 31, .12); }
-.cart-dialog[open] { height: 100dvh; }
-.cart-dialog::backdrop { background: rgba(41, 37, 31, .42); }
+.cart-dialog { position: fixed; inset: 0 0 0 auto; width: min(440px, 100%); max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 30px; border: 0; background: var(--paper); color: var(--ink); box-shadow: -15px 0 50px rgba(41, 37, 31, .12); transform: translateX(100%); transition: transform .3s ease, display .3s allow-discrete, overlay .3s allow-discrete; }
+.cart-dialog[open] { transform: translateX(0); }
+.cart-dialog::backdrop { background: rgba(41, 37, 31, .42); transition: background-color .3s ease, display .3s allow-discrete, overlay .3s allow-discrete; }
+.cart-dialog:not([open])::backdrop { background: rgba(41, 37, 31, 0); }
+@starting-style {
+  .cart-dialog[open] { transform: translateX(100%); }
+  .cart-dialog[open]::backdrop { background: rgba(41, 37, 31, 0); }
+}
 .cart-header { display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 19px; border-bottom: 1px solid var(--line); }
 .cart-header .eyebrow { margin-bottom: 7px; font-size: 8px; }
 .cart-header h2 { margin: 0; font: 500 25px var(--serif); }
@@ -174,7 +179,8 @@ h1, h2, h3, p { margin-top: 0; }
   .site-header { height: 70px; padding: 0 6%; }
   .menu-toggle { width: 40px; height: 40px; display: grid; align-content: center; justify-items: center; gap: 6px; border: 1px solid var(--line); background: transparent; cursor: pointer; }
   .menu-toggle span { width: 16px; height: 1px; background: var(--ink); }
-  .cart-toggle { margin-left: auto; margin-right: 10px; }
+  .cart-toggle { order: 2; margin-left: 10px; }
+  .menu-toggle { order: 1; }
   .site-nav { position: absolute; top: 69px; left: 0; right: 0; display: none; padding: 18px 6% 24px; align-items: stretch; flex-direction: column; gap: 0; background: var(--paper); border-bottom: 1px solid var(--line); }
   .site-nav.is-open { display: flex; }
   .site-nav > a { padding: 13px 0; }
