@@ -16,6 +16,55 @@ siteNav.querySelectorAll("a").forEach((link) => {
   });
 });
 
+const heroCarousel = document.querySelector(".hero-visual");
+const heroSlides = [...heroCarousel.querySelectorAll(".hero-slide")];
+const heroSlideTrack = heroCarousel.querySelector(".hero-slides");
+const heroSlideCount = heroCarousel.querySelector(".photo-count");
+const heroSlideDescription = heroCarousel.querySelector(".photo-description");
+const heroSlideDescriptions = [
+  "日常的第一杯咖啡",
+  "準備一杯香醇咖啡",
+  "留一點時間慢慢品嚐"
+];
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+let currentHeroSlide = 0;
+let heroAutoplay;
+
+function showHeroSlide(index) {
+  currentHeroSlide = (index + heroSlides.length) % heroSlides.length;
+  heroSlideTrack.style.transform = `translateX(-${currentHeroSlide * 100}%)`;
+  heroSlideCount.textContent = `${String(currentHeroSlide + 1).padStart(2, "0")} / ${String(heroSlides.length).padStart(2, "0")}`;
+  heroSlideDescription.textContent = heroSlideDescriptions[currentHeroSlide];
+  heroSlides.forEach((slide, slideIndex) => {
+    slide.setAttribute("aria-hidden", String(slideIndex !== currentHeroSlide));
+  });
+}
+
+function stopHeroAutoplay() {
+  window.clearInterval(heroAutoplay);
+}
+
+function startHeroAutoplay() {
+  stopHeroAutoplay();
+  if (reducedMotion.matches || document.hidden || heroCarousel.matches(":hover") ||
+    heroCarousel.contains(document.activeElement)) return;
+  heroAutoplay = window.setInterval(() => showHeroSlide(currentHeroSlide + 1), 5000);
+}
+
+heroCarousel.querySelector(".hero-slide-previous").addEventListener("click", () => {
+  showHeroSlide(currentHeroSlide - 1);
+});
+heroCarousel.querySelector(".hero-slide-next").addEventListener("click", () => {
+  showHeroSlide(currentHeroSlide + 1);
+});
+heroCarousel.addEventListener("mouseenter", stopHeroAutoplay);
+heroCarousel.addEventListener("mouseleave", startHeroAutoplay);
+heroCarousel.addEventListener("focusin", stopHeroAutoplay);
+heroCarousel.addEventListener("focusout", startHeroAutoplay);
+document.addEventListener("visibilitychange", startHeroAutoplay);
+showHeroSlide(currentHeroSlide);
+startHeroAutoplay();
+
 const practiceMessage = document.querySelector(".practice-message strong");
 const practiceEyebrow = document.querySelector("#practice-eyebrow");
 const practiceHeading = document.querySelector("#practice-heading");
