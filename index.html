@@ -22,9 +22,18 @@
     <nav class="site-nav" aria-label="主要導覽">
       <a href="#story">拉花日常</a>
       <a href="#patterns">入門圖案</a>
+      <a href="#shop">練習選物</a>
       <a href="#practice">練習筆記</a>
       <a class="nav-cta" href="#practice">開始探索 <span aria-hidden="true">↗</span></a>
     </nav>
+    <button class="cart-toggle" type="button" aria-label="開啟購物車，0 件商品" aria-haspopup="dialog">
+      <svg class="cart-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 4h2l2.2 10.1a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 1.9-1.4L21 8H6"></path>
+        <circle cx="10" cy="19" r="1.25"></circle>
+        <circle cx="18" cy="19" r="1.25"></circle>
+      </svg>
+      <span class="cart-count" aria-live="polite">0</span>
+    </button>
   </header>
 
   <main>
@@ -118,6 +127,42 @@
       </div>
     </section>
 
+    <section class="shop section-wrap" id="shop">
+      <div class="section-heading">
+        <div>
+          <div class="section-label"><span>03</span> LITTLE TOOLS, SLOW MOMENTS</div>
+          <h2>替練習準備的小物</h2>
+        </div>
+        <p>挑一件順手的工具，<br>讓每一次練習都更自在。</p>
+      </div>
+      <div class="shop-grid">
+        <article class="shop-card">
+          <div class="shop-image pitcher-image" role="img" aria-label="不鏽鋼拉花奶缸"></div>
+          <div class="shop-info">
+            <div><h3>日常拉花奶缸</h3><p>350 ML · 不鏽鋼</p></div>
+            <span class="shop-price">NT$ 680</span>
+          </div>
+          <button class="add-to-cart" type="button" data-product-id="pitcher">加入購物車 <span aria-hidden="true">＋</span></button>
+        </article>
+        <article class="shop-card">
+          <div class="shop-image beans-image" role="img" aria-label="新鮮烘焙咖啡豆"></div>
+          <div class="shop-info">
+            <div><h3>晨光配方咖啡豆</h3><p>中焙 · 200 G</p></div>
+            <span class="shop-price">NT$ 420</span>
+          </div>
+          <button class="add-to-cart" type="button" data-product-id="beans">加入購物車 <span aria-hidden="true">＋</span></button>
+        </article>
+        <article class="shop-card">
+          <div class="shop-image cup-image" role="img" aria-label="手作陶瓷咖啡杯"></div>
+          <div class="shop-info">
+            <div><h3>慢慢喝陶杯</h3><p>手作陶器 · 250 ML</p></div>
+            <span class="shop-price">NT$ 520</span>
+          </div>
+          <button class="add-to-cart" type="button" data-product-id="cup">加入購物車 <span aria-hidden="true">＋</span></button>
+        </article>
+      </div>
+    </section>
+
     <section class="practice" id="practice">
       <div class="practice-photo" role="img" aria-label="咖啡拉花練習"></div>
       <div class="practice-content">
@@ -150,5 +195,19 @@
     <p>Made with care, and a little bit of milk.</p>
     <span>© 2025 奶泡日記</span>
   </footer>
+
+  <dialog class="cart-dialog" aria-labelledby="cart-title">
+    <div class="cart-header">
+      <div><p class="eyebrow">YOUR LITTLE SELECTION</p><h2 id="cart-title">購物車</h2></div>
+      <button class="cart-close" type="button" aria-label="關閉購物車">×</button>
+    </div>
+    <p class="cart-empty">購物車還是空的，去挑件喜歡的小物吧。</p>
+    <ul class="cart-items" aria-label="購物車商品"></ul>
+    <div class="cart-summary" hidden>
+      <p><span>小計</span><strong class="cart-subtotal">NT$ 0</strong></p>
+      <button class="checkout-button" type="button">前往結帳</button>
+      <p class="checkout-note" aria-live="polite"></p>
+    </div>
+  </dialog>
 </body>
 </html>
