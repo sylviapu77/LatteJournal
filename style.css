@@ -30,8 +30,11 @@ button { font: inherit; }
 .site-nav > a:not(.nav-cta):hover, .text-link:hover { color: var(--coffee); }
 .nav-cta { padding: 12px 17px; border: 1px solid var(--line); font-size: 11px; }
 .nav-cta span { padding-left: 9px; }
-.cart-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; font-size: 10px; white-space: nowrap; }
-.cart-count { min-width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: white; font-size: 9px; }
+.cart-toggle { position: relative; display: grid; width: 42px; height: 42px; place-items: center; padding: 0; border: 0; background: transparent; color: var(--ink); cursor: pointer; }
+.cart-toggle:hover { color: var(--coffee); }
+.cart-toggle:focus-visible { outline: 2px solid var(--coffee); outline-offset: 3px; }
+.cart-icon { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.6; }
+.cart-count { position: absolute; top: 0; right: 0; min-width: 17px; height: 17px; display: grid; place-items: center; padding: 0 4px; border-radius: 999px; background: var(--ink); color: white; font-size: 9px; line-height: 1; }
 .menu-toggle { display: none; }
 
 .hero { min-height: 640px; padding: 76px 10% 85px 13%; display: grid; grid-template-columns: 1fr 1fr; gap: 7%; align-items: center; position: relative; overflow: hidden; }
